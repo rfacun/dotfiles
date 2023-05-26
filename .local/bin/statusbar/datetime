@@ -1,0 +1,3 @@
+#!/bin/sh
+
+date=$(date '+%a, %d/%m/%y %R') ; printf "%s " "$date"
