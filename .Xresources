@@ -1,0 +1,4 @@
+! sxiv colors
+!Sxiv.font: Terminus:size=10
+Sxiv.background: #000000
+Sxiv.foreground: #FFFFFF

@@ -1,3 +1,4 @@
+#
 # ~/.bashrc
 #
 
@@ -9,3 +10,4 @@ PS1='[\u@\h \W]\$ '
 
 # Aliases
 alias mpv="mpv --no-input-default-bindings"
+alias img="sxiv -fabr"
