@@ -1,0 +1,7 @@
+# Binds
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+
+# Config
+set guioptions none         # disable bar
+set first-page-column 1:1   # 1st page on the left for dual-page mode
