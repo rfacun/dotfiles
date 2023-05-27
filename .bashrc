@@ -9,5 +9,13 @@
 PS1='[\u@\h \W]\$ '
 
 # Aliases
+alias ls='ls -lAhv --group-directories-first --color=auto'
+alias grep='grep -i --color=auto'
+alias mkdir='mkdir -p'
+
 alias mpv="mpv --no-input-default-bindings"
 alias img="sxiv -fabr"
+alias scrot="scrot -q 100 -f '%Y%m%d_%H%M%S_scrot.png'"
+
+# Dotfiles management
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
