@@ -1,0 +1,12 @@
+#!/bin/sh
+# Automatically download videos with the best quality possible
+
+case $1 in 
+    yt) yt-dlp --config-location "$HOME/.config/yt-dlp/youtube.conf" "$2" -P "$3" ;;
+    tw) yt-dlp --config-location "$HOME/.config/yt-dlp/twitter.conf" "$2" -P "$3" ;;
+    rd) yt-dlp --config-location "$HOME/.config/yt-dlp/reddit.conf" "$2" -P "$3" ;;
+
+    *)  printf "No source specified... exiting.\n"
+        printf "usage: getvid [yt|rd|tw] <link> <directory>\n"
+        exit 1 ;;
+esac
