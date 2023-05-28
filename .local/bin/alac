@@ -1,4 +1,5 @@
 #!/bin/sh
+# Change the terminal colorscheme
 
 colorscheme=$(ls "$HOME/.config/alacritty/themes" | fzf --border rounded --height 20%) 
 
