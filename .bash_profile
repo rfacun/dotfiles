@@ -16,7 +16,9 @@ export PROGRAMMING="$HOME/programming/"
 export EDITOR="nvim"
 export TERM="alacritty"
 export BROWSER="firefox"
-export DMENU_DEFAULT_OPTS="-i -nb "#0a0e14" -nf "#b3b1ad" -sb "#c78c3f" -sf "#0a0e14""
+export DMENU_DEFAULT_OPTS="-i \
+    -nb "#0a0e14" -nf "#b3b1ad" -sb "#c78c3f" -sf "#0a0e14"\
+    -nhb "#0a0e14" -nhf "#c78c3f" -shb "#b37e38" -shf "#0a0e14""
 
 # Desktop
 export STATUSBAR="$HOME/.scripts/statusbar/"
