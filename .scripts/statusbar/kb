@@ -1,0 +1,3 @@
+#!/bin/sh
+
+kb_map=$(setxkbmap -query | awk '/layout/ { print $2 }') ; printf "^c#c78c3f^   kb^d^ %s" "$kb_map"

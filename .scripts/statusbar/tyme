@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tyme=$(date '+%a, %d/%m/%y %R') ; printf "^c#c78c3f^time^d^ %s " "$tyme"

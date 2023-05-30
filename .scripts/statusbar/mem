@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mem=$(free --mebi | awk 'NR==2 { printf ("%01d%", ($3 * 100 / $2)) }')
+printf "^c#c78c3f^memory^d^ %s" "$mem"
