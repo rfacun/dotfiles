@@ -120,6 +120,7 @@ STICKY 04;37;44
 .zip 01;33
 .zoo 01;33
 .zst 01;33
+.iso 01;33
 
 # Cryptography
 .3des 01;35

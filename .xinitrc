@@ -11,7 +11,7 @@ transmission-daemon &
 xrdb $HOME/.Xresources &
 
 # Wallpaper
-xwallpaper --maximize $PAPE
+xwallpaper --zoom $PAPE
 
 # Window manager
 dwmblocks &
