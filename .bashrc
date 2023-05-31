@@ -20,5 +20,8 @@ alias scrot="scrot -q 100 -f '%Y%m%d_%H%M%S_scrot.png'"
 # Dotfiles management
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+# Source scripts
+source "$HOME/.scripts/fnd"
+
 # Dircolors
 test -r "$HOME/.dir_colors" && eval "$(dircolors "$HOME/.dir_colors")"

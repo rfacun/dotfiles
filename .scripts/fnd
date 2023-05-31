@@ -1,0 +1,5 @@
+#!/bin/sh
+
+fnd() {
+    cd "$(fd . $HOME --type d -H | fzf)"
+}
