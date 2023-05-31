@@ -1,0 +1,76 @@
+# Installation
+#base base-devel linux linux-firmware git unzip
+# Internet
+#networkmanager
+# Boot
+#grub efibootmgr mtools dosfstools os-prober
+# Video
+xf86-video-amdgpu
+mesa
+lib32-mesa
+vulkan-icd-loader
+lib32-vulkan-icd-loader
+vulkan-radeon
+lib32-vulkan-radeon
+redshift-minimal
+# Audio
+pulseaudio
+pulseaudio-alsa
+pulsemixer
+# Display server
+xorg-server
+xorg-xinit
+# Desktop
+libxft
+libx11
+libxinerama  
+xsecurelock
+xwallpaper
+arc-gtk-theme
+papirus-icon-theme
+# Basic
+alacritty
+neovim
+fzf
+fd
+ripgrep
+tree
+htop
+numlockx
+xclip
+git
+unzip
+man
+# Docs
+zathura
+zathura-pdf-mupdf
+zathura-djvu
+# Video
+mpv
+# Images
+sxiv
+# Music
+#mpd
+#ncmpcpp
+#playerctl
+# Internet
+firefox
+keepassxc
+# Disks
+ntfs-3g
+udisks2
+simple-mtpfs
+# Padepue
+#ffmpeg
+#scrot
+#imagemagick
+#ufw
+#dunst
+#picom
+#wget
+#yt-dlp
+#gallery-dl
+#tar
+#gzip
+#zstd
+#unzip
