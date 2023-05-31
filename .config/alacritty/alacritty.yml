@@ -1,6 +1,6 @@
 # Imports
 import:
-  - ~/.config/alacritty/themes/Ayu-Dark.yml
+  - ~/.config/alacritty/themes/ayu-dark.yml
 
 # Environment variables
 env:
