@@ -1,8 +1,4 @@
 #!/bin/sh
-# Setup script for Arch Linux
-# agregar el config alias al bashrc
-#   alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-#   checkear mejor formato de compresión por tipo de archivo
 
 # check packages
 #anki-bin
@@ -22,217 +18,91 @@
 # todo
 #   configurar automaticamente ufw
 #   agregar binds de ffmpeg (picture, audio, video w/o audio, video w/ audio)
-#   agregar bind de sxiv (hacer propia build en el futuro, ref: https://github.com/Flurrywinde/sxiv)
+#   agregar bind de sxiv
 #   agregar bind de scrot
 #   checkear como trabajar con docx, latex
-#   agregar bind de zathura
 #   agregar bind y scripts para montar y desmontar automáticamente
-#   agregar config file y scripts para fzf y rip
+#   agregar config file y scripts para fzf
 #   find dedup program
-#   find which format is best for what file
-#   some file systems support on-the-fly compression 
-#       btrfs, can compress files, directories or entire volumes
-#       zfs, can be enabled to compress on pools or file systems
 #   configurar con arkenfox user.js
-#   add xsecurelock
-#   add dmenu scripts (muchos)
 #   en el futuro configurar dunst
+#   checkear si tengo que descomentar o no inglés en ISO
+#   armar script de hex color converter (todos los formatos + sepctrwm, etc.)
+#   script fzf de todos los configs
+#   script fzf de pelis
+#   script fzf de cambio de colorscheme
+#   aliases de todos los programas
+#   hotkeys de todos losp rogramams
+#   set up firewall
 
-# to-do, no necesariamente para este script
-# checkear si tengo que descomentar o no inglés en ISO
-# armar script de hex color converter (todos los formatos + sepctrwm, etc.)
-# script fzf de todos los configs
-# script fzf de pelis
-# script fzf de cambio de colorscheme
-# aliases de todos los programas
-# hotkeys de todos losp rogramams
-# set up firewall
 
-# remove bashrc default
-# problemas con los system archivos
-
-# pasos a seguir
-#   - update system
-#   - clone dotfiles
-#   - install packages
-#   - reboot
-
-# config files (file, bind o script) para
-#  redshift-minimal - done
-#  ffmpeg
-#  mpv - done
-#  sxiv - done
-#  scrot
-#  yt-dlp
-#  gallery-dl
-#  transmission-cli
-#  tremc-git
-#  neovim
-#  zathura
-#  ntfs-3g
-#  udisks2
-#  simple-mtpfs
-#  fzf
-#  numlockx
-#  xclip
-#  neofetch
-#  dmenu
-#  alacritty
-#  xwallpaper
-#  papirus-icon-theme
-#  arc-gtk-theme
-#  lxappearance
-#  firefox
-
-# Normal colors
-black_n="\033[30m"
-red_n="\033[31m"
-green_n="\033[32m"
-yellow_n="\033[33m"
-blue_n="\033[34m"
-magenta_n="\033[35m"
-cyan_n="\033[36m"
-white_n="\033[37m"
-
-# Bright colors
-black_b="\033[1;30m"
-red_b="\033[1;31m"
-green_b="\033[1;32m"
-yellow_b="\033[1;33m"
-blue_b="\033[1;34m"
-magenta_b="\033[1;35m"
-cyan_b="\033[1;36m"
-white_b="\033[1;37m"
-
-# Reset colors
-nocol="\033[0m"
-
-### ACUTAL SCRIPT
-
-welcome() {
-    while :; do
-        clear ; printf "%bStart the script? [Y/n] %b" "$green_b" "$nocol"
-        read -r confirm
-
-        case $confirm in
-            [Yy][Ee][Ss]|[Yy]) clear ; setup_script ; break ;;
-            [Nn][Oo]|[Nn])     exit 0 ;;
-
-            *) printf "Please enter a valid option.\n" ; sleep 2 ;;
-        esac
-    done
-}
-
-system_update() {
-    printf "%b>> Updating the system...%b\n" "$green_b" "$nocol"
+setup_script() {
+    printf ">> Updating the system...\n"
     sudo pacman --noconfirm -Syu
-}
+    printf ">> Installing AUR helper (yay)...\n"
+    [ -d "$HOME/yay/" ] && rm -rf "yay/"
+    git clone https://aur.archlinux.org/yay.git
+    (cd yay/ &&  makepkg -si --noconfirm)
+    printf ">> Finished updating and installing AUR helper...\n\n" ; sleep 5
 
-install_aur_helper() {
-    printf "%b>> Installing AUR helper (paru)...%b\n" "$green_b" "$nocol"
-
-    rm -rf paru ; git clone https://aur.archlinux.org/paru.git
-    (cd paru &&  makepkg -si --noconfirm)
-}
-
-config_git() {
-    printf "%b>> Configuring Git...%b\n" "$green_b" "$nocol"
-
+    printf ">> Configuring Git...\n"
     git config --global user.name "rfacun"
     git config --global user.email "rossi_facundo@outlook.com"
     git config --global credential.helper cache --timeout=21600
+    printf "Updated user name, email and credential cache.\n\n" ; sleep 5
 
-    printf "Updated user name, email and credential cache.\n"
-}
-
-clone_dotfiles() {
-    printf "%b>> Cloning the dotfiles...%b\n" "$green_b" "$nocol"
-
-    rm -rf "$HOME/.bashrc"
-    rm -rf "$HOME/.dotfiles"
-    
+    printf ">> Cloning the dotfiles...\n"
+    [ -f "$HOME/.bashrc" ] && rm -rf "$HOME/.bashrc"
+    [ -d "$HOME/.dotfiles/" ] && rm -rf "$HOME/.dotfiles/"
     printf ".dotfiles/" > "$HOME/.gitignore"
-
     # This line clones the repo
     git clone --bare https://github.com/rfacun/dotfiles.git "$HOME/.dotfiles/"
     git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" config --local status.showUntrackedFiles no
     git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" checkout
-}
+    printf "Dotfiles cloned.\n\n" ; sleep 5
 
-move_dotfiles() {
-    printf "%b>> Moving files to proper directories...%b\n" "$green_b" "$nocol"
+    printf ">> Moving files to proper directories...\n"
+    sudo chown root:root "$HOME/etc/pacman.conf"
+    sudo mv "$HOME/etc/pacman.conf" /etc/
+    sudo mkdir -p /etc/X11/xorg.conf.d/
+    sudo chown root:root "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf"
+    sudo mv "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf" /etc/X11/xorg.conf.d/
+    printf "Files were moved.\n\n" ; sleep 5
 
-    move_pacman() {
-        sudo chown root:root "$HOME/etc/pacman.conf"
-        sudo mv "$HOME/etc/pacman.conf" /etc/
-    }
-    
-    move_amdconf() {
-        sudo mkdir -p /etc/X11/xorg.conf.d/
-        sudo chown root:root "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf"
-        sudo mv "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf" /etc/X11/xorg.conf.d/
-    }
-
-    move_pacman && move_amdconf
-    printf "The files \"pacman.conf\" and \"20-amdgpu.conf\" were moved.\n"
-}
-
-install_packages() {
-    printf "%b>> Installing packages...%b\n" "$green_b" "$nocol"
-
-    paru -Syu
+    printf ">> Installing packages...\n"
+    yay -Syu
     # This line installs all the packages
-    awk '!/^ *#/ && NF' package-list | xargs paru -S --noconfirm
-
+    awk '!/^ *#/ && NF' package-list | xargs yay -S --noconfirm
     curl -OL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Hack.zip
     sudo unzip "Hack.zip" -d /usr/share/fonts/ && fc-cache
+    printf "Packages installed.\n\n" ; sleep 5
 
-    
-    printf "%b>> Cloning and installing DWM...%b\n" "$green_b" "$nocol"
-    git clone https://github.com/rfacun/dwm.git "$HOME/.config/"
-    (cd $HOME/.config/dwm && sudo make clean install)
+    printf ">> Cloning programs (DWM, DWMBLOCKS, DMENU)...\n"
+    git clone https://github.com/rfacun/dwm.git "$HOME/.config/dwm/"
+    (cd $HOME/.config/dwm/ && sudo make clean install)
+    git clone https://github.com/rfacun/dwmblocks.git "$HOME/.config/dwmblocks/"
+    (cd $HOME/.config/dwmblocks/ && sudo make clean install)
+    git clone https://github.com/rfacun/dmenu.git "$HOME/.config/dmenu/"
+    (cd $HOME/.config/dmenu/ && sudo make clean install)
+    printf "Programs cloned.\n\n" ; sleep 5
 
-    printf "%b>> Cloning and installing DWMBLOCKS...%b\n" "$green_b" "$nocol"
-    git clone https://github.com/rfacun/dwmblocks.git "$HOME/.config/"
-    (cd $HOME/.config/dwmblocks && sudo make clean install)
-
-    printf "%b>> Cloning and installing DMENU...%b\n" "$green_b" "$nocol"
-    git clone https://github.com/rfacun/dmenu.git "$HOME/.config/"
-    (cd $HOME/.config/dmenu && sudo make clean install)
-}
-
-clean_files() {
-    printf "%b>> Cleaning up \$HOME...%b\n" "$green_b" "$nocol"
-
-    rm -rf "$HOME/paru/"
+    printf ">> Cleaning up \$HOME...\n"
+    rm -rf "$HOME/yay/"
     rm -rf "$HOME/etc/"
     rm -rf "$HOME/Hack.zip"
+    printf "Removed unnecessary files.\n\n" ; sleep 5
 
-    printf "Removed \$HOME/paru/, \$HOME/etc/ and \$HOME/Hack.zip file."
-    
-    printf "\n%b>> Setup done! Rebooting in 5 seconds...%b" "$green_b" "$nocol"
+    printf ">> Setup done! Rebooting in 5 seconds..."
     sleep 5 && reboot
 }
 
-setup_script() {
-    # Update the system before anything
-    system_update
+[ pwd != "$HOME" ] && cd "$HOME"
+clear
+printf "Start the script? [Y/n] "
+read -r confirm
+case $confirm in
+    [Yy][Ee][Ss]|[Yy]) clear ; setup_script ; break ;;
+    [Nn][Oo]|[Nn])     exit 0 ;;
 
-    # Needed for some important packages like spectrwm
-    install_aur_helper
-
-    # Set up git config file
-    config_git
-
-    # Clone the configs and move them where needed, also install
-    # all the necessary packages
-    clone_dotfiles
-    move_dotfiles
-    install_packages
-
-    # Clean your room... I mean $HOME
-    clean_files
-}
-
-# Always work in the $HOME directory
-    [ -d "$HOME" ] || cd "$HOME" && welcome
+    *) printf "Please enter a valid option.\n" ; exit 1 ;;
+esac
