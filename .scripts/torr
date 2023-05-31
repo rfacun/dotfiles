@@ -1,5 +1,0 @@
-#!/bin/sh
-# Automatically adds torrent file and starts the daemon if it's not running
-
-pgrep -x transmission-da >/dev/null || transmission-daemon
-transmission-remote -a "$@"
