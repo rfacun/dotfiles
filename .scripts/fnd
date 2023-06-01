@@ -1,5 +1,12 @@
 #!/bin/sh
 
 fnd() {
-    cd "$(fd . $HOME --type d -H | fzf)"
+    cd "$(find \
+        "$XDG_CONFIG_HOME" \
+        "$HOME/.scripts" \
+        "$DOCS" \
+        "$DOWNLOADS" \
+        "$MEDIA" \
+        "$PROGRAMMING" \
+        -type d | fzf)" || exit
 }
