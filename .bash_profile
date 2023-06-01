@@ -17,7 +17,7 @@ export EDITOR="nvim"
 export TERM="alacritty"
 export BROWSER="firefox"
 
-export FZF_DEFAULT_OPTS="--height 30% --layout=reverse --border=sharp --color=bg+:-1"
+export FZF_DEFAULT_OPTS="--height 30% --no-scrollbar --layout=reverse --border=sharp --color=bg+:-1"
 export DMENU_DEFAULT_OPTS="-i \
     -nb "#0a0e14" -nf "#b3b1ad" -sb "#c78c3f" -sf "#0a0e14"\
     -nhb "#0a0e14" -nhf "#c78c3f" -shb "#b37e38" -shf "#0a0e14""
