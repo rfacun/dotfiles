@@ -18,7 +18,6 @@ success_message() {
 
 # INITIAL CONFIG
 loadkeys la-latin1
-setfont /usr/share/kbd/consolefonts/ter-c16b.psf.gz
 timedatectl set-ntp true
 
 
