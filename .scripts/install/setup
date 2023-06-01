@@ -35,78 +35,167 @@
 #   hotkeys de todos losp rogramams
 #   set up firewall
 
+# Vaiables
+col_red="\033[1;31m"
+col_grn="\033[1;32m"
+col_ylw="\033[1;33m"
+col_cyn="\033[1;36m"
+col_non="\033[0m"
 
-setup_script() {
-    printf ">> Updating the system...\n"
+# Functions
+message_good() {
+    printf "%b>> %s %b\n\n" "$col_grn" "${1}" "$col_non" ; sleep 3
+}
+
+message_bad() {
+    printf "%b>> %s %b\n" "$col_red" "${1}" "$col_non"
+}
+
+message_ugly() {
+    printf "%b>> %s %b\n" "$col_ylw" "${1}" "$col_non"
+}
+
+message_normal() {
+    printf "%b>> %s %b\n" "$col_cyn" "${1}" "$col_non"
+}
+
+intial_configuration() {
+    message_normal "Updating the system..."
     sudo pacman --noconfirm -Syu
+
+    message_normal "Changing system keybaord settings..."
     localectl set-keymap la-latin1
-    printf ">> Installing AUR helper (yay)...\n"
+
+    message_normal "Installing AUR helper (yay)..."
     [ -d "$HOME/yay/" ] && rm -rf "yay/"
     git clone https://aur.archlinux.org/yay.git
     (cd yay/ &&  makepkg -si --noconfirm)
-    printf "Finished updating and installing AUR helper...\n\n" ; sleep 5
 
-    printf ">> Configuring Git...\n"
+    message_good "System initial configuration done!"
+}
+
+git_config() {
+    message_normal "Configuring git..."
+
     git config --global user.name "rfacun"
     git config --global user.email "rossi_facundo@outlook.com"
     git config --global credential.helper cache --timeout=21600
-    printf "Updated user name, email and credential cache.\n\n" ; sleep 5
 
-    printf ">> Cloning the dotfiles...\n"
+    message_good "Updated user name, email and credential cache."
+}
+
+dotfiles_config() {
+    move_pacman() {
+        sudo chown root:root "$HOME/etc/pacman.conf"
+        sudo mv "$HOME/etc/pacman.conf" /etc/
+    }
+
+    move_amd_conf() {
+        sudo mkdir -p /etc/X11/xorg.conf.d/
+        sudo chown root:root "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf"
+        sudo mv "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf" /etc/X11/xorg.conf.d/
+    }
+
+    message_normal "Cloning the dotfiles..."
+
     [ -f "$HOME/.bashrc" ] && rm -rf "$HOME/.bashrc"
+    [ -f "$HOME/.bash_profile" ] && rm -rf "$HOME/.bashrc"
     [ -d "$HOME/.dotfiles/" ] && rm -rf "$HOME/.dotfiles/"
     printf ".dotfiles/" > "$HOME/.gitignore"
+
     # This line clones the repo
     git clone --bare https://github.com/rfacun/dotfiles.git "$HOME/.dotfiles/"
+
     git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" config --local status.showUntrackedFiles no
     git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" checkout
-    printf "Dotfiles cloned.\n\n" ; sleep 5
 
-    printf ">> Moving files to proper directories...\n"
-    sudo chown root:root "$HOME/etc/pacman.conf"
-    sudo mv "$HOME/etc/pacman.conf" /etc/
-    sudo mkdir -p /etc/X11/xorg.conf.d/
-    sudo chown root:root "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf"
-    sudo mv "$HOME/etc/X11/xorg.conf.d/20-amdgpu.conf" /etc/X11/xorg.conf.d/
-    printf "Files were moved.\n\n" ; sleep 5
+    message_good "Finished cloning the dotfiles."
 
-    printf ">> Installing packages...\n"
+    message_normal "Moving files to proper directories..."
+    move_pacman && move_amd_conf
+
+    message_good "Done moving files."
+}
+
+package_install() {
+    message_normal "Installing packages..."
+
     yay -Syu --noconfirm
+
     # This line installs all the packages
     awk '!/^ *#/ && NF' package-list | xargs yay -S --noconfirm
+
+    message_normal "Installing \"Hack Nerd Font\"..."
     curl -OL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Hack.zip
     sudo unzip "Hack.zip" -d /usr/share/fonts/ && fc-cache
-    printf "Packages installed.\n\n" ; sleep 5
 
-    printf ">> Cloning programs (DWM, DWMBLOCKS, DMENU)...\n"
+    message_good "Finished installing packages."
+}
+
+clone_repos() {
+    message_normal "Cloning and installing \"dwm\"..."
     git clone https://github.com/rfacun/dwm.git "$HOME/.config/dwm/"
     (cd "$HOME/.config/dwm/" && sudo make clean install)
+
+    message_normal "Cloning and installing \"dwmblocks\"..."
     git clone https://github.com/rfacun/dwmblocks.git "$HOME/.config/dwmblocks/"
     (cd "$HOME/.config/dwmblocks/" && sudo make clean install)
+
+    message_normal "Cloning and installing \"dmenu\"..."
     git clone https://github.com/rfacun/dmenu.git "$HOME/.config/dmenu/"
     (cd "$HOME/.config/dmenu/" && sudo make clean install)
-    printf "Programs cloned.\n\n" ; sleep 5
 
-    printf ">> Cleaning up \$HOME...\n"
+    message_good "Finished cloning and installing programs."
+}
 
-    rm -rf "$HOME/yay/"
+clean_up() {
+    message_normal "Cleaning up the \$HOME directory"
+
+    message_normal "Making folders..."
+    mkdir -p "$HOME/documents/"
+    mkdir -p "$HOME/downloads/"
+    mkdir -p "$HOME/media/xsecurelock/"
+    mkdir -p "$HOME/programming/"
+
+    message_normal "Removing installation files..."
     rm -rf "${HOME:?}/etc/"
     rm -rf "$HOME/Hack.zip"
-    rm -rf "$HOME/setup"
     rm -rf "$HOME/package-list"
-    printf "Removed unnecessary files.\n\n" ; sleep 5
+    rm -rf "$HOME/setup"
+    rm -rf "$HOME/yay/"
 
-    printf ">> Setup done! Rebooting in 5 seconds..."
+    message_good "Done!! System is ready to be used!"
+    message_good "Rebooting in 5 seconds..."
     sleep 5 && reboot
 }
 
-[ "$(pwd)" != "$HOME" ] && cd "$HOME" || exit 1
-clear
-printf "Start the script? [y/n] "
-read -r confirm
-case $confirm in
-    [Yy][Ee][Ss]|[Yy]) clear ; setup_script ;;
-    [Nn][Oo]|[Nn])     exit 0 ;;
+welcome (){
+    clear ; printf "Start the script? [yes/no] "
+    read -r confirm
 
-    *) printf "Please enter a valid option.\n" ; exit ;;
-esac
+    case $confirm in
+        [Yy][Ee][Ss]) clear ; main ;;
+        [Nn][Oo])     exit ;;
+    
+        *) printf "Please enter a valid option.\n" ; exit ;;
+    esac
+}
+
+# Main function
+main() {
+    intial_configuration
+
+    git_config
+    dotfiles_config
+
+    package_install
+    clone_repos
+
+    clean_up
+}
+
+if [ "$(pwd)" != "$HOME" ]; then
+    cd "$HOME" && welcome
+else
+    welcome
+fi
