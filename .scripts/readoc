@@ -1,0 +1,11 @@
+#!/bin/sh
+# Fuzzy find documents
+
+doc="$(find "$DOCS" "$DOWNLOADS" \
+    -type f \( -iname "*.pdf" -o -iname "*.epub" -o -iname "*.djvu" \) | fzf $FZF_DEFAULT_OPTS)"
+
+if [ -z "$doc" ]; then
+    exit
+else
+    zathura "$doc"
+fi
