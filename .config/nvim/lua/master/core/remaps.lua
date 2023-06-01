@@ -12,8 +12,8 @@ vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 --vim.keymap.set("n", "K", "mzJ`z")
 
 -- Cursor in the middle when half-page-jumping
-vim.keymap.set("v", "<C-d>", "<C-d>zz")
-vim.keymap.set("v", "<C-u>", "<C-u>zz")
+vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz")
+vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz")
 
 -- Search terms stay in the middle
 vim.keymap.set("n", "n", "nzzzv")

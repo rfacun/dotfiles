@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   -- Visual -----------------------
   "folke/tokyonight.nvim",
+  'Shatur/neovim-ayu',
 
   { "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", opts = true }
