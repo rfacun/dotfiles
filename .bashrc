@@ -12,6 +12,7 @@ PS1='[\u@\h \W]\$ '
 alias ls='ls -lAhv --group-directories-first --color=auto'
 alias grep='grep -i --color=auto'
 alias mkdir='mkdir -p'
+alias cp='cp -rv'
 
 alias mpv="mpv --no-input-default-bindings"
 alias img="sxiv -fabr"
