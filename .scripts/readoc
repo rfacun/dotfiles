@@ -7,5 +7,5 @@ doc="$(find "$DOCS" "$DOWNLOADS" \
 if [ -z "$doc" ]; then
     exit
 else
-    zathura "$doc"
+    zathura --mode fullscreen "$doc" > /dev/null 2>&1
 fi
