@@ -118,9 +118,9 @@ arch-chroot /mnt /bin/bash -c "sed -i '86i\Defaults !tty_tickets' /etc/sudoers"
 # COPY SETUP FILE
 # maybe the setup script can be put here as a chroot command to make the script fully automatic
 info_message ">> COPYING SETUP FILE"
-cp setup.sh /mnt/home/rfacun/
+cp setup /mnt/home/rfacun/
 cp package-list /mnt/home/rfacun/
-arch-chroot /mnt /bin/bash -c "chown rfacun:wheel /home/rfacun/setup.sh"
+arch-chroot /mnt /bin/bash -c "chown rfacun:wheel /home/rfacun/setup"
 arch-chroot /mnt /bin/bash -c "chown rfacun:wheel /home/rfacun/package-list"
 success_message ">> DONE!"
 

@@ -1,9 +1,27 @@
 # Installation
-#base base-devel linux linux-firmware git unzip
+#base
+#base-devel
+#linux
+#linux-firmware
+#git
+#unzip
+
 # Internet
 #networkmanager
+firefox
+keepassxc
+#wget
+#yt-dlp
+#gallery-dl
+#ufw
+
 # Boot
-#grub efibootmgr mtools dosfstools os-prober
+#grub
+#efibootmgr
+#mtools
+#dosfstools
+#os-prober
+
 # Video
 xf86-video-amdgpu
 mesa
@@ -13,13 +31,23 @@ lib32-vulkan-icd-loader
 vulkan-radeon
 lib32-vulkan-radeon
 redshift-minimal
+xorg-xrandr
+mpv
+#ffmpeg
+#picom
+
 # Audio
 pulseaudio
 pulseaudio-alsa
 pulsemixer
+#mpd
+#ncmpcpp
+#playerctl
+
 # Display server
 xorg-server
 xorg-xinit
+
 # Desktop
 libxft
 libx11
@@ -28,6 +56,12 @@ xsecurelock
 xwallpaper
 arc-gtk-theme
 papirus-icon-theme
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
+#dunst
+
 # Basic
 alacritty
 neovim
@@ -38,39 +72,21 @@ tree
 htop
 numlockx
 xclip
-git
-unzip
 man
+#git
+#unzip
+
 # Docs
 zathura
 zathura-pdf-mupdf
 zathura-djvu
-# Video
-mpv
+
 # Images
 sxiv
-# Music
-#mpd
-#ncmpcpp
-#playerctl
-# Internet
-firefox
-keepassxc
+#scrot
+#imagemagick
+
 # Disks
 ntfs-3g
 udisks2
 simple-mtpfs
-# Padepue
-#ffmpeg
-#scrot
-#imagemagick
-#ufw
-#dunst
-#picom
-#wget
-#yt-dlp
-#gallery-dl
-#tar
-#gzip
-#zstd
-#unzip

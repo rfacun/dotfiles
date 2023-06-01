@@ -39,11 +39,12 @@
 setup_script() {
     printf ">> Updating the system...\n"
     sudo pacman --noconfirm -Syu
+    localectl set-keymap la-latin1
     printf ">> Installing AUR helper (yay)...\n"
     [ -d "$HOME/yay/" ] && rm -rf "yay/"
     git clone https://aur.archlinux.org/yay.git
     (cd yay/ &&  makepkg -si --noconfirm)
-    printf ">> Finished updating and installing AUR helper...\n\n" ; sleep 5
+    printf "Finished updating and installing AUR helper...\n\n" ; sleep 5
 
     printf ">> Configuring Git...\n"
     git config --global user.name "rfacun"
@@ -70,7 +71,7 @@ setup_script() {
     printf "Files were moved.\n\n" ; sleep 5
 
     printf ">> Installing packages...\n"
-    yay -Syu
+    yay -Syu --noconfirm
     # This line installs all the packages
     awk '!/^ *#/ && NF' package-list | xargs yay -S --noconfirm
     curl -OL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.1/Hack.zip
@@ -79,30 +80,33 @@ setup_script() {
 
     printf ">> Cloning programs (DWM, DWMBLOCKS, DMENU)...\n"
     git clone https://github.com/rfacun/dwm.git "$HOME/.config/dwm/"
-    (cd $HOME/.config/dwm/ && sudo make clean install)
+    (cd "$HOME/.config/dwm/" && sudo make clean install)
     git clone https://github.com/rfacun/dwmblocks.git "$HOME/.config/dwmblocks/"
-    (cd $HOME/.config/dwmblocks/ && sudo make clean install)
+    (cd "$HOME/.config/dwmblocks/" && sudo make clean install)
     git clone https://github.com/rfacun/dmenu.git "$HOME/.config/dmenu/"
-    (cd $HOME/.config/dmenu/ && sudo make clean install)
+    (cd "$HOME/.config/dmenu/" && sudo make clean install)
     printf "Programs cloned.\n\n" ; sleep 5
 
     printf ">> Cleaning up \$HOME...\n"
+
     rm -rf "$HOME/yay/"
-    rm -rf "$HOME/etc/"
+    rm -rf "${HOME:?}/etc/"
     rm -rf "$HOME/Hack.zip"
+    rm -rf "$HOME/setup"
+    rm -rf "$HOME/package-list"
     printf "Removed unnecessary files.\n\n" ; sleep 5
 
     printf ">> Setup done! Rebooting in 5 seconds..."
     sleep 5 && reboot
 }
 
-[ pwd != "$HOME" ] && cd "$HOME"
+[ "$(pwd)" != "$HOME" ] && cd "$HOME" || exit 1
 clear
-printf "Start the script? [Y/n] "
+printf "Start the script? [y/n] "
 read -r confirm
 case $confirm in
-    [Yy][Ee][Ss]|[Yy]) clear ; setup_script ; break ;;
+    [Yy][Ee][Ss]|[Yy]) clear ; setup_script ;;
     [Nn][Oo]|[Nn])     exit 0 ;;
 
-    *) printf "Please enter a valid option.\n" ; exit 1 ;;
+    *) printf "Please enter a valid option.\n" ; exit ;;
 esac
