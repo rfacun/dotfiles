@@ -1,8 +1,0 @@
-#!/bin/sh
-# Toggle between keyboard layouts
-
-if [ "$(setxkbmap -query | awk '/layout/ { print $2 }')" = "latam" ]; then
-    setxkbmap ru
-else
-    setxkbmap latam
-fi

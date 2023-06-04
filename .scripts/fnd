@@ -1,7 +1,0 @@
-#!/bin/sh
-
-fnd() {
-    cd "$(find \
-        "$XDG_CONFIG_HOME" "$HOME/.scripts" "$DOCS" "$DOWNLOADS" "$MEDIA" "$PROGRAMMING" \
-        -type d | fzf $FZF_DEFAULT_OPTS)" || exit
-}

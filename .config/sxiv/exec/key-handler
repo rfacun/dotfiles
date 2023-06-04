@@ -2,12 +2,7 @@
 
 while read -r file; do
     case "$1" in
-        "w") xwallpaper --zoom "$file" ; pape_loc=$(realpath "$file")
-            if [ "$(grep "PAPE" "$HOME/.bash_profile")" ]; then
-                sed -i "s@.*PAPE.*@export PAPE=\"${pape_loc}\"@" "$HOME/.bash_profile"
-            else
-                printf "export PAPE=\"%s\"" "${pape_loc}" >> "$HOME/.bash_profile"
-            fi ;;
+        "w") pape "$file" & ;;
 
         "r") rm "$file" ;;
         "p") realpath "$file" | xclip -selection clipboard ;;

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Shortcuts
+alias \
+    mv="mv -iv"                                             \
+    cp="cp -rv"                                             \
+    rm="rm -Iv"                                             \
+    bc="bc -ql"                                             \
+    mkd="mkdir -pv"                                         \
+    mpv="mpv --no-input-default-bindings"                   \
+    img="sxiv -fabr"                                        \
+    scrot="scrot -q 100 -f '%Y%m%d_%H%M%S_scrot.png'"       \
+
+
+# Color
+alias \
+    ls="ls --group-directories-first --color=auto"          \
+    la="ls -lAhv --group-directories-first --color=auto"    \
+    grep="grep -i --color=auto"                             \
+    diff="diff --color=auto"                                \
+    ip="ip --color=auto"                                    \
+
+# Dotfiles
+alias \
+    config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
