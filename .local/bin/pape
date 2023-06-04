@@ -1,0 +1,6 @@
+#!/bin/sh
+
+linked_pape="$XDG_DATA_HOME/pape"
+ln -sf "$(readlink -f "$1")" "$linked_pape"
+
+xwallpaper --zoom "$linked_pape"

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+fnd() {
+    cd "$(find "$HOME" -type d | fzf)" || exit
+}

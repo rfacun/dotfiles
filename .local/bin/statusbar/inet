@@ -1,0 +1,3 @@
+#!/bin/sh
+
+inet=$(nmcli general status | awk 'NR==2 {print $1}') ; printf "^c#c78c3f^inet^d^ %s" "$inet"

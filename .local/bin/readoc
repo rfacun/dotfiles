@@ -1,0 +1,18 @@
+#!/bin/sh
+# Fuzzy find documents
+
+doc=$(find "$HOME/documents" "$HOME/downloads" -type f \( \
+    -iname "*.pdf" \
+    -o -iname "*.kfx" \
+    -o -iname "*.azw" \
+    -o -iname "*.azw3" \
+    -o -iname "*.djvu" \
+    -o -iname "*.epub" \
+    -o -iname "*.mobi" \
+    \) | fzf)
+
+if [ -z "$doc" ]; then
+    exit
+else
+    zathura --mode fullscreen "$doc" > /dev/null 2>&1
+fi

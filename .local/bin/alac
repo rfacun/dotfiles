@@ -1,0 +1,10 @@
+#!/bin/sh
+# Change the terminal colorscheme
+
+colorscheme=$(find "$XDG_CONFIG_HOME/alacritty/themes" \
+    | sort \
+    | awk -F '/' 'NR>1 { print $7 }' \
+    | dmenu -l 10 -p "Colorscheme" $DMENU_DEFAULT_OPTS)
+
+[ "$colorscheme" ] && sed -i "3s@.*@  - ~/.config/alacritty/themes/${colorscheme}@" \
+    "$XDG_CONFIG_HOME/alacritty/alacritty.yml"
