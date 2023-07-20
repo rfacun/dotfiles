@@ -1,0 +1,4 @@
+! sxiv colors
+Sxiv.background: #0a0e14
+Sxiv.foreground: #b3b1ad
+Sxiv.font: monospace:size=10

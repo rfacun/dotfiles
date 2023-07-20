@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    nvim "$NOTES_DIR/$1.txt"
+else
+    note=$(fd --hidden --no-ignore --type f . "$NOTES_DIR" | awk -F "/" '{ print $6 }' | fzf --header "Edit selected note.")
+    [ -z "$note" ] || nvim "$NOTES_DIR/$note"
+fi

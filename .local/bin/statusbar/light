@@ -1,0 +1,10 @@
+#!/bin/sh
+
+color="^c#e09d47^"
+end="^d^"
+
+if [ -z "$(pidof -sx redshift)" ]; then
+    printf "%slight%s on   " "$color" "$end"
+elif [ -n "$(pidof -sx redshift)" ]; then
+    printf "%slight%s off   " "$color" "$end"
+fi

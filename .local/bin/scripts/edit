@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    nvim "$1"
+else
+    file=$(fd --hidden --no-ignore --type f\
+        --exclude ".cache"\
+        --exclude ".local/share/Trash"\
+        --exclude ".mozilla"\
+        --exclude ".npm"\
+        --exclude ".pki"\
+        . "$HOME" | fzf --header "Edit selected file.")
+    [ -z "$file" ] || nvim "$file"
+fi

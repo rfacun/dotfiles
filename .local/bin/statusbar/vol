@@ -1,0 +1,12 @@
+#!/bin/sh
+
+color="^c#e09d47^"
+end="^d^"
+mute=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{ print $2 }')
+actual=$(pactl get-sink-volume @DEFAULT_SINK@ | awk -F "/" 'NR==1 { gsub(/ /, "", $0); print $2 }')
+
+if [ "$mute" = "no" ]; then
+    printf "%svolume%s %s   " "$color" "$end" "$actual"
+else
+    printf "%svolume%s off   " "$color" "$end"
+fi

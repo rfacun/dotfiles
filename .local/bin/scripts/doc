@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    zathura "$1" >/dev/null 2>&1
+else
+    doc=$(fd --hidden --no-ignore --type f\
+        --extension ".pdf"\
+        --extension ".xps"\
+        --extension ".epub"\
+        --extension ".djvu"\
+        . "$DOCS_DIR" | fzf --header "View selected document.")
+    [ -z "$doc" ] || zathura "$doc" >/dev/null 2>&1
+fi

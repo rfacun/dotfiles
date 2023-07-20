@@ -1,0 +1,19 @@
+#!/bin/sh
+
+fg="^c#b3b1ad^"
+bg="^b#22262b^"
+end="^d^"
+caps_lock=$(xset q | grep "Num Lock" | awk '{ print $4 }')
+num_lock=$(xset q | grep "Num Lock" | awk '{ print $8 }')
+
+if [ "$caps_lock" = "on" ]; then
+    if [ "$num_lock" = "on" ]; then
+        printf "%s%s capslock & numlock %s" "$bg" "$fg" "$end"
+    else
+        printf "%s%s capslock %s" "$bg" "$fg" "$end"
+    fi
+else
+    if [ "$num_lock" = "on" ]; then
+        printf "%s%s numlock %s" "$bg" "$fg" "$end"
+    fi
+fi

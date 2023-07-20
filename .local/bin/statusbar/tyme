@@ -1,0 +1,7 @@
+#!/bin/sh
+
+color="^c#e09d47^"
+end="^d^"
+tyme=$(date '+%a, %d/%m/%y %R')
+
+printf "%stime%s %s " "$color" "$end" "$tyme"

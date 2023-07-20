@@ -1,0 +1,74 @@
+# Imports
+import:
+  - ~/.config/alacritty/themes/ayu-dark.yml
+
+# Environment variables
+env:
+  TERM: alacritty
+  WINIT_X11_SCALE_FACTOR: "1.0"
+
+# Window settings
+window:
+  padding:
+    x: 7
+    y: 4
+  opacity: 1
+  title: Alacritty
+  dynamic_title: true
+  class:
+    instance: Alacritty
+    general: Alacritty
+  dimensions:
+    columns: 115
+    lines: 35
+
+# Scrolling
+scrolling:
+  history: 10000
+  multiplier: 3
+
+# Font configuration    
+font:
+  normal:
+    family: Hack
+    style: Regular
+  bold:
+    family: Hack
+    style: Bold
+  italic:
+    family: Hack
+    style: Italic
+  bold_italic:
+    family: Hack
+    style: Bold Italic
+  size: 9.5   # Hack
+  offset:
+    x: 0
+    y: 1
+  glyph_offset:
+    x: 0
+    y: 0
+draw_bold_text_with_bright_colors: false
+
+# Cursor
+cursor:
+  style:
+    shape: Block
+    blinking: Off
+
+  unfocused_hollow: true
+
+# Config changes
+live_config_reload: true
+
+# Shell settings
+shell:
+  program: /bin/bash
+  args:
+    - --login
+
+# Start dir
+working_directory: None
+
+key_bindings:
+  - { key: F11, action: ToggleFullscreen }

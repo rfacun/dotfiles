@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    sxiv -fabr "$1"
+else
+    # Fuzzy find single image
+    #picture=$(fd --hidden --no-ignore --type f . "$PICS_DIR" | fzf --header "View selected image.")
+    #[ -z "$picture" ] || sxiv -fabr "$picture"
+
+    # Open all images under $PICS_DIR
+    sxiv -fabr "$PICS_DIR"
+fi

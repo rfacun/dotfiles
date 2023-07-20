@@ -1,0 +1,18 @@
+#!/bin/sh
+
+confirm() {
+    printf "Yes\nNo" | dmenu -p "Confirm "
+}
+
+menu=$(printf "Lock\nSuspend\nReboot\nPoweroff" | dmenu -p "Session: ")
+
+case $menu in
+    "Lock")
+        xsecurelock ;;
+    "Suspend")
+        [ "$(confirm)" = "Yes" ] && systemctl suspend ;;
+    "Reboot")
+        [ "$(confirm)" = "Yes" ] && systemctl reboot ;;
+    "Poweroff")
+        [ "$(confirm)" = "Yes" ] && systemctl poweroff ;;
+esac
