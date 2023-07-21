@@ -4,7 +4,7 @@ monlayout
 xset s off -dpms
 xwallpaper --maximize "$PAPE"
 
-[ -f "$HOME/.Xresources" ] && xrdb -merge -I "$HOME/.Xresources"
+[ -f "$XDG_CONFIG_HOME/x/xresources" ] && xrdb -merge -I "$XDG_CONFIG_HOME/x/xresources"
 
 programs="numlockx transmission-daemon redshift dwmblocks"
 for program in $programs; do

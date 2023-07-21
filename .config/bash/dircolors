@@ -249,3 +249,5 @@ STICKY 04;37;44
 .vob 32
 .webm 32
 .wmv 32
+
+# vim: set ft=dircolors:

@@ -48,4 +48,4 @@ arc() {
 }
 
 # dircolors
-eval "$(dircolors "$HOME/.dircolors")"
+eval "$(dircolors "$XDG_CONFIG_HOME/bash/dircolors")"
