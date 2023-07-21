@@ -8,6 +8,6 @@ else
         --extension ".xps"\
         --extension ".epub"\
         --extension ".djvu"\
-        . "$DOCS_DIR" | fzf --header "View selected document.")
+        . "$(xdg-user-dir DOCUMENTS)" | fzf --header "View selected document.")
     [ -z "$doc" ] || zathura "$doc" >/dev/null 2>&1
 fi

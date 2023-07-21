@@ -7,6 +7,6 @@ else
     #picture=$(fd --hidden --no-ignore --type f . "$PICS_DIR" | fzf --header "View selected image.")
     #[ -z "$picture" ] || sxiv -fabr "$picture"
 
-    # Open all images under $PICS_DIR
-    sxiv -fabr "$PICS_DIR"
+    # Open all images under $XDG_PICTURES_DIR
+    sxiv -fabr "$(xdg-user-dir PICTURES)"
 fi

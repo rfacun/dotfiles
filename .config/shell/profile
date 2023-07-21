@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1091
 
 # Bash config
 [ -f "$XDG_CONFIG_HOME/bash/bashrc" ] && . "$XDG_CONFIG_HOME/bash/bashrc"
@@ -7,18 +8,12 @@
 export PATH="$PATH:$HOME/.local/bin"
 
 # Directories
-export DOCS_DIR="$HOME/documents"
-export DLS_DIR="$HOME/downloads"
-export MUSIC_DIR="$HOME/media/music"
-export NOTES_DIR="$HOME/documents/notes"
-export PICS_DIR="$HOME/media/pictures"
-export VIDEOS_DIR="$HOME/media/videos"
-export SCREENSAVERS="$HOME/media/screensavers"
-
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
+export NOTES_DIR="$XDG_DOCUMENTS_DIR/notes"
+export SCREENSAVERS="$HOME/media/screensavers"
 
 # Screen locker
 export XSECURELOCK_AUTH_TIMEOUT=5
@@ -33,6 +28,7 @@ export EDITOR="nvim"
 export TERM="alacritty"
 export PAPE="$PICS_DIR/mars-2.jpg"
 
+# Programs' settings
 export FZF_DEFAULT_COMMAND="fd --hidden --no-ignore . $HOME"
 export FZF_DEFAULT_OPTS="--no-scrollbar --no-border --layout=reverse --color=bg+:-1"
 

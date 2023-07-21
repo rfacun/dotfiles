@@ -10,5 +10,5 @@ else
         --exclude ".npm"\
         --exclude ".pki"\
         . "$HOME" | fzf --header "Edit selected file.")
-    [ -z "$file" ] || nvim "$file"
+    [ -z "$file" ] || $EDITOR "$file"
 fi

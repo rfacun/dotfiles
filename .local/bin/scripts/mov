@@ -5,7 +5,7 @@ get_movie() {
         --extension ".mkv"\
         --extension ".mp4"\
         --extension ".webm"\
-        . "$VIDEOS_DIR" | fzf --header="Select a movie or episode.")
+        . "$(xdg-user-dir VIDEOS)" | fzf --header="Select a movie or episode.")
 }
 
 get_sub() {
@@ -16,7 +16,7 @@ get_sub() {
         --extension ".srt"\
         --extension ".ssa"\
         --extension ".ass"\
-        . "$VIDEOS_DIR" | fzf --header="Select subtitles.")
+        . "$(xdg-user-dir VIDEOS)" | fzf --header="Select subtitles.")
 }
 
 sub_condition() {
