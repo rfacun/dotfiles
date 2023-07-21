@@ -1,10 +1,10 @@
 #!/bin/sh
 
 confirm() {
-    printf "Yes\nNo" | dmenu -p "Confirm "
+    printf "Yes\nNo" | dmenu -i -p "Confirm "
 }
 
-menu=$(printf "Lock\nSuspend\nReboot\nPoweroff" | dmenu -p "Session: ")
+menu=$(printf "Lock\nSuspend\nReboot\nPoweroff" | dmenu -i -p "Session: ")
 
 case $menu in
     "Lock")
