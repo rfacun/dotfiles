@@ -4,7 +4,7 @@ confirm() {
     printf "Yes\nNo" | dmenu -i -p "Confirm "
 }
 
-menu=$(printf "Lock\nSuspend\nReboot\nPoweroff" | dmenu -i -p "Session: ")
+menu=$(printf "Lock\nSuspend\nReboot\nPoweroff" | dmenu -i -p "Session ")
 
 case $menu in
     "Lock")
