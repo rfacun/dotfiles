@@ -6,6 +6,7 @@ while read -r file; do
         "w")
             sed -i "s|^export PAPE.*|export PAPE=\"$(realpath "$file" | sed 's|/home/rfacun/media/pictures|$PICS_DIR|g')\"|g" "$HOME/.profile"
             xwallpaper --maximize "$file" ;;
+        "s") cp "$(realpath "$file")" "$SCREENSAVERS/$(basename "$file")" ;;
         "r") rm "$file" ;;
         "p") realpath "$file" | xclip -selection clipboard ;;
     esac
