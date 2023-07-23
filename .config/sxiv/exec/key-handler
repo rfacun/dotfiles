@@ -4,7 +4,7 @@
 while read -r file; do
     case "$1" in
         "w")
-            sed -i "s|^export PAPE.*|export PAPE=\"$(realpath "$file" | sed 's|/home/rfacun/media/pictures|$PICS_DIR|g')\"|g" "$HOME/.profile"
+            sed -i "s|^export PAPE.*|export PAPE=\"$(realpath "$file" | sed "s|/home/rfacun/media/pictures|$(xdg-user-dir PICTURES)|g")\"|g" "$HOME/.profile"
             xwallpaper --maximize "$file" ;;
         "s") cp "$(realpath "$file")" "$SCREENSAVERS/$(basename "$file")" ;;
         "r") rm "$file" ;;
