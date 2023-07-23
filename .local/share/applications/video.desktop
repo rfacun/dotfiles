@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=video player
+Exec=/usr/bin/mpv --no-input-default-bindings -- %U

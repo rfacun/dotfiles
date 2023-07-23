@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=image viewer
+Exec=/usr/bin/sxiv -fabr -- %U

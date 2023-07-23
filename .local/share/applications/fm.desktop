@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=file manager
+Exec=/usr/bin/alacritty --class Alacritty,floating -e lf -- %u

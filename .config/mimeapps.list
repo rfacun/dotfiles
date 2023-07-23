@@ -1,0 +1,16 @@
+[Default Applications]
+inode/directory=fm.desktop;
+text/plain=text.desktop;
+text/x-shellscript=text.desktop;
+application/pdf=docs.desktop;
+application/epub+zip=docs.desktop;
+image/vnd.djvu=docs.desktop;
+image/jpeg=img.desktop;
+image/png=img.desktop;
+image/gif=img.desktop;
+video/webm=video.desktop;
+video/mp4=video.desktop;
+video/x-matroska=video.desktop;
+application/x-bittorrent=torr.desktop
+x-scheme-handler/magnet=torr.desktop;
+application/octet-stream=org.keepassxc.KeePassXC.desktop;
