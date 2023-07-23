@@ -26,7 +26,7 @@ export XSECURELOCK_SHOW_KEYBOARD_LAYOUT=0 # Not implemented in 1.8.0
 export BROWSER="firefox"
 export EDITOR="nvim"
 export TERM="alacritty"
-export PAPE="$PICS_DIR/mars-2.jpg"
+export PAPE="$(xdg-user-dir PICTURES)/mars-2.jpg"
 
 # Programs' settings
 export FZF_DEFAULT_COMMAND="fd --hidden --no-ignore . $HOME"
