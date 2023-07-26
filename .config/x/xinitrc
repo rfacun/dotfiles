@@ -6,7 +6,7 @@ xwallpaper --maximize "$PAPE"
 
 [ -f "$XDG_CONFIG_HOME/x/xresources" ] && xrdb -merge -I "$XDG_CONFIG_HOME/x/xresources"
 
-programs="numlockx transmission-daemon redshift dwmblocks"
+programs="numlockx sxhkd transmission-daemon redshift dwmblocks"
 for program in $programs; do
     pidof -sx "$program" || "$program" &
 done > /dev/null 2>&1

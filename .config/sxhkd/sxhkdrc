@@ -1,0 +1,23 @@
+# Base
+super + {Return,n,o,x}
+    {$TERM,$TERM_FLOATING,dmenu_run -i,session}
+
+# System
+super + p; {h}
+    $TERM_FLOATING {-T htop -e htop}
+
+# Video
+super + v; {r,l}
+    {$TERM_FLOATING -T radeontop -e radeontop,kill -38 $(pidof dwmblocks); chlight}
+Print
+    scrn
+
+# Audio
+super + {comma,period,m}
+    pactl {set-sink-volume @DEFAULT_SINK@ -5%,set-sink-volume @DEFAULT_SINK@ +5%,set-sink-mute @DEFAULT_SINK@ toggle}; kill -35 $(pidof dwmblocks)
+super +a; v
+    pulsemixer
+
+# Internet
+super + i; {f,t}
+    {firefox, $TERM_FLOATING -T tremc -e tremc -X}

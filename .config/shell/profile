@@ -26,7 +26,13 @@ export XSECURELOCK_SHOW_KEYBOARD_LAYOUT=0 # Not implemented in 1.8.0
 export BROWSER="firefox"
 export EDITOR="nvim"
 export TERM="alacritty"
+export TERM_FLOATING="alacritty --class Alacritty,floating"
 export PAPE="$(xdg-user-dir PICTURES)/mars-2.jpg"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export HISTFILE="$XDG_CONFIG_HOME/bash/history"
+export XINITRC="$XDG_CONFIG_HOME/x/xinitrc"
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 # Programs' settings
 export FZF_DEFAULT_COMMAND="fd --hidden --no-ignore . $HOME"
@@ -43,8 +49,5 @@ export GIT_PS1_SHOWCOLORHINTS=1
 export PROMPT_DIRTRIM=1
 export PROMPT_COMMAND="build_prompt"
 
-export HISTFILE="$XDG_CONFIG_HOME/bash/history"
-export XINITRC="$XDG_CONFIG_HOME/x/xinitrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+# Start X session
 #startx "$XINITRC"
