@@ -1,23 +1,27 @@
 # Base
-super + {Return,n,o,x}
+super + {Return,n,p,x}
     {$TERM,$TERM_FLOATING,dmenu_run -i,session}
 
-# System
-super + p; {h}
-    $TERM_FLOATING {-T htop -e htop}
-
 # Video
-super + v; {r,l}
-    {$TERM_FLOATING -T radeontop -e radeontop,kill -38 $(pidof dwmblocks); chlight}
+super + u; h
+    $TERM_FLOATING -T htop -e htop
+super + u; v
+    {$TERM_FLOATING -T radeontop -e radeontop
+super + u; a
+    $TERM_FLOATING -T pulsemixer -e pulsemixer
+super + u; t
+    $TERM_FLOATING -T tremc -e tremc -X
+super + u; i
+    $TERM_FLOATING -T nm -e nm-connection-editor
+super + u; l
+    kill -38 $(pidof dwmblocks); chlight
 Print
-    scrn
+    screenshot
 
 # Audio
 super + {comma,period,m}
     pactl {set-sink-volume @DEFAULT_SINK@ -5%,set-sink-volume @DEFAULT_SINK@ +5%,set-sink-mute @DEFAULT_SINK@ toggle}; kill -35 $(pidof dwmblocks)
-super +a; v
-    pulsemixer
 
-# Internet
-super + i; {f,t}
-    {firefox, $TERM_FLOATING -T tremc -e tremc -X}
+# Programs
+super + o; {f,k,d,m,i,e}
+    {firefox,keepassxc,$TERM_FLOATING -e doc,$TERM_FLOATING -e mov,$TERM_FLOATING -e img,$TERM_FLOATING -e edit}
