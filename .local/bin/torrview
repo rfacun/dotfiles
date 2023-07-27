@@ -3,9 +3,9 @@
 if [ ! -t 0 ]; then
     color="^c#e09d47^"
     end="^d^"
-    tyme=$(date '+%a, %d/%m/%y %R')
+    torrs=$(transmission-remote -l | grep -v 100% | sed '1d;$d' | wc -l)
 
-    printf "%stime%s %s " "$color" "$end" "$tyme"
+    printf "   %storrs%s %s   " "$color" "$end" "$torrs"
 else
     printf "This is a statusbar script. Do not execute directly!\n"
 fi

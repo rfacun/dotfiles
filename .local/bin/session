@@ -1,1 +1,21 @@
-/home/rfacun/files/scripts/util/session
+#!/bin/sh
+
+confirm() {
+    printf "Yes\nNo" | dmenu -i -p "Confirm "
+}
+
+menu=$(printf "Lock\nSuspend\nReboot\nPoweroff\nKill" | dmenu -i -p "Session ")
+
+case $menu in
+    "Lock")
+        xsecurelock ;;
+    "Suspend")
+        [ "$(confirm)" = "Yes" ] && systemctl suspend ;;
+    "Reboot")
+        [ "$(confirm)" = "Yes" ] && systemctl reboot ;;
+    "Poweroff")
+        [ "$(confirm)" = "Yes" ] && systemctl poweroff ;;
+    "Kill")
+        [ "$(confirm)" = "Yes" ] && pkill dwm ;;
+
+esac

@@ -1,1 +1,17 @@
-/home/rfacun/files/scripts/term/img
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    sxiv -fabr "$1" >/dev/null 2>&1
+else
+    dirs=$(fd --type d . "$(xdg-user-dir PICTURES)"\
+        | sed "s|$(xdg-user-dir PICTURES)/||"\
+        | fzf --multi --header "View pictures in selected folder(s)."\
+        | sed "s|^|$(xdg-user-dir PICTURES)/|")
+
+    actual=""
+    for dir in $dirs; do
+        actual="${actual:+${actual} }${dir}"
+    done
+
+    sxiv -fabr $actual >/dev/null 2>&1
+fi

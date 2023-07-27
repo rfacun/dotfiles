@@ -1,1 +1,10 @@
-/home/rfacun/files/scripts/term/note
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    $EDITOR "$NOTES_DIR/$1.txt"
+else
+    note=$(fd --hidden --no-ignore --type f . "$NOTES_DIR"\
+        | awk -F "/" '{ print $6 }'\
+        | fzf --header "Select a note to read or edit.")
+    [ -z "$note" ] || $EDITOR "$NOTES_DIR/$note"
+fi

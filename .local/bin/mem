@@ -1,1 +1,11 @@
-/home/rfacun/files/scripts/sbar/mem
+#!/bin/sh
+
+if [ ! -t 0 ]; then
+    color="^c#e09d47^"
+    end="^d^"
+    mem=$(free --mebi | awk 'NR==2 { printf ("%01d%", ($3 * 100 / $2)) }')
+
+    printf "%smemory%s %s   " "$color" "$end" "$mem"
+else
+    printf "This is a statusbar script. Do not execute directly!\n"
+fi

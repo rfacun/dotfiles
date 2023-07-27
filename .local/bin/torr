@@ -1,1 +1,3 @@
-/home/rfacun/files/scripts/util/torr
+#!/bin/sh
+
+transmission-remote -a "$@" 

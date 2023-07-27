@@ -7,7 +7,7 @@
 sources=(
     "/usr/share/git/completion/git-completion.bash"
     "/usr/share/git/completion/git-prompt.sh"
-    "$HOME/.local/bin/goto"
+    "$HOME/.local/bin/jumpdir"
 )
 
 for i in "${sources[@]}"; do [ -f "$i" ] && . "$i"; done
@@ -19,23 +19,22 @@ build_prompt() {
 
 # Aliases
 alias \
-	mv="mv -iv" \
-	cp="cp -rv" \
-	rm="rm -Iv" \
-	bc="bc -ql" \
-	mkd="mkdir -pv" \
-	mpv="mpv --no-input-default-bindings" \
-	sxiv="sxiv -fabr" \
-	vim="nvim"\
-    d="dust --reverse --depth 1"\
-
-alias \
-	ls="ls --group-directories-first --color=auto" \
-	la="ls -lAhv --group-directories-first --color=auto" \
-	grep="grep -i --color=auto" \
-	diff="diff --color=auto" \
+	ls="ls --group-directories-first --color=auto"\
+	la="ls -lAhv --group-directories-first --color=auto"\
+	mv="mv -iv"\
+	cp="cp -rv"\
+	rm="rm -Iv"\
+	bc="bc -ql"\
+	mkd="mkdir -pv"\
+    t="tree --filesfirst -aC"\
+    d="dust --apparent-size --reverse --depth 1"\
+    e="edit"\
+	grep="grep -i --color=auto"\
+	diff="diff --color=auto"\
 	ip="ip --color=auto"\
-    t="tree --filesfirst -aC"
+	mpv="mpv --no-input-default-bindings"\
+	sxiv="sxiv -fabr"\
+	vim="nvim"\
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 

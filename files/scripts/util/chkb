@@ -1,9 +1,0 @@
-#!/bin/sh
-
-get_kb=$(setxkbmap -query | awk '/layout/ { print $2 }')
-
-if [ "$get_kb" = "latam" ]; then
-    setxkbmap ru
-else
-    setxkbmap latam
-fi

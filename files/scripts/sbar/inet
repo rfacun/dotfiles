@@ -1,7 +1,0 @@
-#!/bin/sh
-
-color="^c#e09d47^"
-end="^d^"
-inet=$(nmcli general status | awk 'NR==2 { print $1 }')
-
-printf "%sinet%s %s   " "$color" "$end" "$inet"

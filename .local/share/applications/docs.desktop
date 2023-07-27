@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=document viewer
-Exec=/usr/bin/zathura -- %u
+Exec=/usr/bin/zathura --mode fullscreen -- %u

@@ -1,1 +1,14 @@
-/home/rfacun/files/scripts/sbar/light
+#!/bin/sh
+
+if [ ! -t 0 ]; then
+    color="^c#e09d47^"
+    end="^d^"
+    
+    if [ -z "$(pidof -sx redshift)" ]; then
+        printf "%slight%s on   " "$color" "$end"
+    elif [ -n "$(pidof -sx redshift)" ]; then
+        printf "%slight%s off   " "$color" "$end"
+    fi
+else
+    printf "This is a statusbar script. Do not execute directly!\n"
+fi

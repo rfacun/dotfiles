@@ -1,1 +1,11 @@
-/home/rfacun/files/scripts/sbar/disk
+#!/bin/sh
+
+if [ ! -t 0 ]; then
+    color="^c#e09d47^"
+    end="^d^"
+    disk=$(df -h / | awk 'NR==2 { print $5 }')
+    
+    printf "%sdisk%s %s   " "$color" "$end" "$disk"
+else
+    printf "This is a statusbar script. Do not execute directly!\n"
+fi

@@ -1,1 +1,15 @@
-/home/rfacun/files/scripts/term/edit
+#!/bin/sh
+
+if [ -n "$1" ]; then
+    $EDITOR "$1"
+else
+    file=$(fd --hidden --no-ignore --type f\
+        --exclude ".cache"\
+        --exclude ".dotfiles"\
+        --exclude ".local/share/Trash"\
+        --exclude ".mozilla"\
+        --exclude ".npm"\
+        --exclude ".pki"\
+        . "$HOME" | fzf --header "Select a file to edit.")
+    [ -z "$file" ] || $EDITOR "$file"
+fi

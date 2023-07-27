@@ -1,1 +1,7 @@
-/home/rfacun/files/scripts/util/chlight
+#!/bin/sh
+
+if [ -z "$(pidof -sx redshift)" ]; then
+    redshift >/dev/null 2>&1
+else
+    pkill redshift
+fi

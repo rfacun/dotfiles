@@ -1,1 +1,16 @@
-/home/rfacun/files/scripts/sbar/vol
+#!/bin/sh
+
+if [ ! -t 0 ]; then
+    color="^c#e09d47^"
+    end="^d^"
+    mute=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{ print $2 }')
+    actual=$(pactl get-sink-volume @DEFAULT_SINK@ | awk -F "/" 'NR==1 { gsub(/ /, "", $0); print $2 }')
+
+    if [ "$mute" = "no" ]; then
+        printf "%volume%s %s   " "$color" "$end" "$actual"
+    else
+        printf "%volume%s off   " "$color" "$end"
+    fi
+else
+    printf "This is a statusbar script. Do not execute directly!\n"
+fi

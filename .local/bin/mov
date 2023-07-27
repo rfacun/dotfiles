@@ -1,1 +1,45 @@
-/home/rfacun/files/scripts/term/mov
+#!/bin/sh
+
+get_movie() {
+    movie=$(fd --hidden --no-ignore --type f\
+        --extension ".mkv"\
+        --extension ".mp4"\
+        --extension ".webm"\
+        . "$(xdg-user-dir VIDEOS)"\
+        | sed "s|$(xdg-user-dir VIDEOS)/||"\
+        | fzf --header="Select a movie or episode to watch."\
+        | sed "s|^|$(xdg-user-dir VIDEOS)/|")
+}
+
+get_sub() {
+    sub=$(fd --hidden --no-ignore --type f\
+        --extension ".idx"\
+        --extension ".sub"\
+        --extension ".pgs"\
+        --extension ".srt"\
+        --extension ".ssa"\
+        --extension ".ass"\
+        . "$(xdg-user-dir VIDEOS)"\
+        | sed "s|$(xdg-user-dir VIDEOS)/||"\
+        | fzf --header="Select subtitles."\
+        | sed "s|^|$(xdg-user-dir VIDEOS)/|")
+}
+
+sub_condition() {
+    if [ -z "$sub" ]; then
+        mpv "${1:-$movie}" --no-input-default-bindings >/dev/null 2>&1
+    else
+        mpv "${1:-$movie}" --sub-file="$sub" --no-input-default-bindings >/dev/null 2>&1
+    fi
+}
+
+if [ -n "$1" ]; then
+    get_sub
+    sub_condition "$@"
+else
+    get_movie
+    if [ -n "$movie" ]; then
+        get_sub
+        sub_condition "$@"
+    fi
+fi
